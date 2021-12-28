@@ -7,7 +7,7 @@ using namespace std;
 typedef struct genre *adrGenre;
 typedef struct item *adrItem;
 typedef struct elm_relation *adrRelation;
-
+//tes
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
