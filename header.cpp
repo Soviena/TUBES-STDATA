@@ -1,12 +1,12 @@
 #include "header.h"
 
-void create_list(list &L){
-    L.firstGenre = NULL;
-    L.firstItem = NULL;
-    L.firstRelation = NULL;
+void create_list(adrList &L){
+    L->firstGenre = NULL;
+    L->firstGenre = NULL;
+    L->firstGenre = NULL;
 }
 
-adrGenre createGenre(list L, string name){
+adrGenre createGenre(adrList L, string name){
     adrGenre G;
     G->genre_name = name;
     G->lists = L;
@@ -14,7 +14,7 @@ adrGenre createGenre(list L, string name){
     return G;
 }
 
-adrItem createItem(list L, string title, int episode){
+adrItem createItem(adrList L, string title, int episode){
     adrItem I;
     I->title = title;
     I->episode = episode;
@@ -23,11 +23,11 @@ adrItem createItem(list L, string title, int episode){
     return I;
 }
 
-void insert_parent(list &L, adrGenre G){
-    if (L.firstGenre == NULL){
-        L.firstGenre = G;
+void insert_parent(adrList &L, adrGenre G){
+    if (L->firstGenre == NULL){
+        L->firstGenre = G;
     } else {
-        adrGenre P = L.firstGenre;
+        adrGenre P = L->firstGenre;
         while (P->next != NULL){
             P = P->next;
         }
@@ -35,12 +35,12 @@ void insert_parent(list &L, adrGenre G){
     }
 }
 
-adrGenre delete_parent(list &L, adrGenre G){
-    if (L.firstGenre == NULL) return NULL;
-    if (L.firstGenre == G){
-        L.firstGenre = NULL;
+adrGenre delete_parent(adrList &L, adrGenre G){
+    if (L->firstGenre == NULL) return NULL;
+    if (L->firstGenre == G){
+        L->firstGenre = NULL;
     }
-    adrGenre P = L.firstGenre;
+    adrGenre P = L->firstGenre;
     while (P->next != G){
         P = P->next;
     }
@@ -49,16 +49,16 @@ adrGenre delete_parent(list &L, adrGenre G){
     return G;
 }
 
-void showParent(list L){
-    adrGenre P = L.firstGenre;
+void showParent(adrList L){
+    adrGenre P = L->firstGenre;
     while (P != NULL){
         cout << P->genre_name << endl;
         P = P->next;
     } 
 }
 
-adrGenre findParent(list L, string G){
-    adrGenre P = L.firstGenre;
+adrGenre findParent(adrList L, string G){
+    adrGenre P = L->firstGenre;
     while (P->genre_name != G){
         P = P->next;
         if(P->genre_name == G){

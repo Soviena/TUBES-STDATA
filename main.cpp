@@ -1,7 +1,7 @@
 #include "header.h"
 
 int main(){
-    list L;
+    adrList L;
     create_list(L);
     adrGenre  G = createGenre(L,"Action");
     insert_parent(L,G);

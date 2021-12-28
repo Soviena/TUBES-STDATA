@@ -7,11 +7,12 @@ using namespace std;
 typedef struct genre *adrGenre;
 typedef struct item *adrItem;
 typedef struct elm_relation *adrRelation;
+typedef struct list *adrList;
 
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
-    list lists;
+    adrList lists;
 };
 struct item /* Buku atau anime */{ 
     adrItem next;
@@ -31,31 +32,31 @@ struct list{
     adrRelation firstRelation;
 };
 
-void create_list(list &L);
-adrGenre createGenre(list L, string name);
-adrItem createItem(list L, string title, int episode);
+void create_list(adrList &L);
+adrGenre createGenre(adrList L, string name);
+adrItem createItem(adrList L, string title, int episode);
 
-void insert_parent(list &L, adrGenre G);
-adrGenre delete_parent(list &L, adrGenre G);
-void showParent(list L);
-adrGenre findParent(list L, string G);
+void insert_parent(adrList &L, adrGenre G);
+adrGenre delete_parent(adrList &L, adrGenre G);
+void showParent(adrList L);
+adrGenre findParent(adrList L, string G);
 
-void insert_child(list &L, adrItem I);
-adrItem delete_child(list &L, adrItem I);
-void showChild(list L);
-adrItem findChild(list L, string genre, string title);
+void insert_child(adrList &L, adrItem I);
+adrItem delete_child(adrList &L, adrItem I);
+void showChild(adrList L);
+adrItem findChild(adrList L, string genre, string title);
 
-void makeRelation(list &L, string genre, string title);
-void deleteRelation(list &L, string genre, string title);
+void makeRelation(adrList &L, string genre, string title);
+void deleteRelation(adrList &L, string genre, string title);
 
 // pengolahan data //
-void showTitleGenre(list L, string title);
+void showTitleGenre(adrList L, string title);
 // Menampilkan semua genre dari suatu title
-void markFinished(list L, string title);
+void markFinished(adrList L, string title);
 // Menandai suatu title bahwa title itu sudah dibaca atau ditonton
-void deleteFinished(list L);
+void deleteFinished(adrList L);
 // Cari semua item yang telah ditandai finished lalu hapus item tersebut
-void totalEpisode(list L, string genreName);
+void totalEpisode(adrList L, string genreName);
 
 void menu(int input);
 
