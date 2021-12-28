@@ -12,7 +12,7 @@ void createGenrelist(genreList &GL){
 }
 
 adrGenre createGenre(relationList &RL, string name){
-    adrGenre G;
+    adrGenre G = new genre;
     G->genre_name = name;
     G->lists = RL;
     G->next = NULL;
@@ -20,7 +20,7 @@ adrGenre createGenre(relationList &RL, string name){
 }
 
 adrItem createItem(string title, int episode){
-    adrItem I;
+    adrItem I = new item;
     I->title = title;
     I->episode = episode;
     I->next = NULL;

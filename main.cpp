@@ -10,7 +10,9 @@ int main(){
     adrGenre  G = createGenre(RL,"Action");
     insert_parent(GL,G);
     G = createGenre(RL, "Horror");
+    insert_parent(GL,G);
     G = createGenre(RL, "Fantasy");
+    insert_parent(GL,G);
     showParent(GL);
     return 0;
 }
