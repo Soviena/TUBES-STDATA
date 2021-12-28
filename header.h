@@ -7,15 +7,11 @@ using namespace std;
 typedef struct genre *adrGenre;
 typedef struct item *adrItem;
 typedef struct elm_relation *adrRelation;
-<<<<<<< HEAD
 
 struct relationList{
     adrRelation first;
 };
 
-=======
-//tes
->>>>>>> 7fa9f2e9af293d36ce1d16cfc9db28b609aa0ba5
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
