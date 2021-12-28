@@ -7,12 +7,11 @@ using namespace std;
 typedef struct genre *adrGenre;
 typedef struct item *adrItem;
 typedef struct elm_relation *adrRelation;
-typedef struct list *adrList;
 
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
-    adrList lists;
+    relationList lists;
 };
 struct item /* Buku atau anime */{ 
     adrItem next;
@@ -26,37 +25,46 @@ struct elm_relation{
     adrRelation next;
 };
 
-struct list{
-    adrGenre firstGenre;
-    adrItem firstItem;
-    adrRelation firstRelation;
+struct relationList{
+    adrRelation first;
 };
 
-void create_list(adrList &L);
-adrGenre createGenre(adrList L, string name);
-adrItem createItem(adrList L, string title, int episode);
+struct genreList{
+    adrGenre first;
+};
 
-void insert_parent(adrList &L, adrGenre G);
-adrGenre delete_parent(adrList &L, adrGenre G);
-void showParent(adrList L);
-adrGenre findParent(adrList L, string G);
+struct itemList{
+    adrItem first;
+};
 
-void insert_child(adrList &L, adrItem I);
-adrItem delete_child(adrList &L, adrItem I);
-void showChild(adrList L);
-adrItem findChild(adrList L, string genre, string title);
+void createRelationlist(relationList &RL);
+void createItemlist(itemList &IL);
+void createGenrelist(genreList &GL);
 
-void makeRelation(adrList &L, string genre, string title);
-void deleteRelation(adrList &L, string genre, string title);
+adrGenre createGenre(genreList &GL, string name);
+adrItem createItem(itemList &IL, string title, int episode);
+
+void insert_parent(genreList &GL, adrGenre G);
+adrGenre delete_parent(genreList &GL, adrGenre G);
+void showParent(genreList GL);
+adrGenre findParent(genreList L, string G);
+
+void insert_child(itemList &IL, adrItem I);
+adrItem delete_child(itemList &IL, adrItem I);
+void showChild(itemList IL);
+adrItem findChild(itemList IL, genreList GL, string genre, string title);
+
+void makeRelation(relationList &RL, itemList IL, genreList GL, string genre, string title);
+void deleteRelation(relationList &RL, itemList IL, genreList GL, string genre, string title);
 
 // pengolahan data //
-void showTitleGenre(adrList L, string title);
+void showTitleGenre(itemList IL, genreList GL, string title);
 // Menampilkan semua genre dari suatu title
-void markFinished(adrList L, string title);
+void markFinished(itemList IL, string title);
 // Menandai suatu title bahwa title itu sudah dibaca atau ditonton
-void deleteFinished(adrList L);
+void deleteFinished(itemList IL);
 // Cari semua item yang telah ditandai finished lalu hapus item tersebut
-void totalEpisode(adrList L, string genreName);
+void totalEpisode(genreList GL, string genreName);
 
 void menu(int input);
 
