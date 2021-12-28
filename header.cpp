@@ -1,5 +1,5 @@
 #include "header.h"
-tes
+
 void createRelationlist(relationList &RL){
     RL.first = NULL;
 }
