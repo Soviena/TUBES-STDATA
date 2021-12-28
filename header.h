@@ -8,6 +8,10 @@ typedef struct genre *adrGenre;
 typedef struct item *adrItem;
 typedef struct elm_relation *adrRelation;
 
+struct relationList{
+    adrRelation first;
+};
+
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
@@ -25,10 +29,6 @@ struct elm_relation{
     adrRelation next;
 };
 
-struct relationList{
-    adrRelation first;
-};
-
 struct genreList{
     adrGenre first;
 };
@@ -41,8 +41,8 @@ void createRelationlist(relationList &RL);
 void createItemlist(itemList &IL);
 void createGenrelist(genreList &GL);
 
-adrGenre createGenre(genreList &GL, string name);
-adrItem createItem(itemList &IL, string title, int episode);
+adrGenre createGenre(relationList &RL, string name);
+adrItem createItem(string title, int episode);
 
 void insert_parent(genreList &GL, adrGenre G);
 adrGenre delete_parent(genreList &GL, adrGenre G);
