@@ -2,7 +2,7 @@
 #define HEADER_H_INCLUDED
 
 #include <iostream>
-using std::string, std::cout, std::cin, std::endl;
+using namespace std;
 
 typedef struct genre *adrGenre;
 typedef struct item *adrItem;
