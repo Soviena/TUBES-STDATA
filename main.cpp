@@ -1,18 +1,14 @@
 #include "header.h"
 
 int main(){
-    relationList RL;
-    genreList GL;
-    itemList IL;
-    createGenrelist(GL);
-    createItemlist(IL);
-    createRelationlist(RL);
-    adrGenre  G = createGenre(RL,"Action");
-    insert_parent(GL,G);
-    G = createGenre(RL, "Horror");
-    insert_parent(GL,G);
-    G = createGenre(RL, "Fantasy");
-    insert_parent(GL,G);
-    showParent(GL);
+    list L;
+    create_list(L);
+    adrGenre  G = createGenre(L,"Action");
+    insert_parent(L,G);
+    G = createGenre(L, "Horror");
+    insert_parent(L,G);
+    G = createGenre(L, "Fantasy");
+    insert_parent(L,G);
+    showParent(L);
     return 0;
 }
