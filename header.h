@@ -15,11 +15,13 @@ struct genre /* Genre */{
 };
 struct item /* Buku atau anime */{ 
     adrItem next;
-    string ttle;
+    string title;
+    int episode; // total episode atau volume pada title
+    bool finished;
 };
 
 struct elm_relation{
-    adrGenre nextGenre;
+    adrItem item;
     adrRelation next;
 };
 
@@ -29,23 +31,33 @@ struct list{
     adrRelation firstRelation;
 };
 
-list create_list(list &L);
+void create_list(list &L);
 adrGenre createGenre(string name);
-adrItem createItem(string title);
+adrItem createItem(string title, int episode);
 
+void insert_parent(list &L, adrGenre G);
+adrGenre delete_parent(list &L, adrGenre G);
+void showParent(list L);
+adrGenre findParent(list L, string G);
 
+void insert_child(list &L, adrItem I);
+adrItem delete_child(list &L, adrItem I);
+void showChild(list L);
+adrItem findChild(list L, string genre, string title);
+
+void makeRelation(list &L, string genre, string title);
+void deleteRelation(list &L, string genre, string title);
+
+// pengolahan data //
+void showTitleGenre(list L, string title);
+// Menampilkan semua genre dari suatu title
+void markFinished(list L, string title);
+// Menandai suatu title bahwa title itu sudah dibaca atau ditonton
+void deleteFinished(list L);
+// Cari semua item yang telah ditandai finished lalu hapus item tersebut
+void totalEpisode(list L, string genreName);
 
 /*
-○ Insert Parent (5 Poin)
-○ Delete Parent (10 Poin)
-○ Show Parent (5 Poin)
-○ Find Parent (5 Poin)
-○ Insert Child of parent X (5 Poin)
-○ Delete Child of parent X(10 Poin)
-○ Show Child of parent X (5 Poin)
-○ Find Child of parent X (5 Poin)
-○ Membuat relasi antara parent dan child (15 poin)
-○ Menghapus relasi antara parent dan child (15 poin)
 ○ 2 jenis pengolahan data yang melibatkan child dan parent (total 20 poin),
 misal :
     ■ Min/Max from all data parent and child,
@@ -56,8 +68,5 @@ misal :
     ■ show some data from all data parent and child,
     ■ Dll
 */
-
-
-
 
 #endif // HEADER_H_INCLUDED
