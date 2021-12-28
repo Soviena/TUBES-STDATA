@@ -32,8 +32,8 @@ struct list{
 };
 
 void create_list(list &L);
-adrGenre createGenre(string name);
-adrItem createItem(string title, int episode);
+adrGenre createGenre(list L, string name);
+adrItem createItem(list L, string title, int episode);
 
 void insert_parent(list &L, adrGenre G);
 adrGenre delete_parent(list &L, adrGenre G);
