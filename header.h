@@ -26,6 +26,28 @@ struct elm_relation{
     adrRelation next;
 };
 
+/*
+○ Insert Parent (5 Poin)
+○ Delete Parent (10 Poin)
+○ Show Parent (5 Poin)
+○ Find Parent (5 Poin)
+○ Insert Child of parent X (5 Poin)
+○ Delete Child of parent X(10 Poin)
+○ Show Child of parent X (5 Poin)
+○ Find Child of parent X (5 Poin)
+○ Membuat relasi antara parent dan child (15 poin)
+○ Menghapus relasi antara parent dan child (15 poin)
+○ 2 jenis pengolahan data yang melibatkan child dan parent (total 20 poin),
+misal :
+    ■ Min/Max from all data parent and child,
+    ■ count something from all data parent and child,
+    ■ sum something from all data parent and child,
+    ■ find child from all data parent,
+    ■ update some data from all data parent and child,
+    ■ show some data from all data parent and child,
+    ■ Dll
+*/
+
 
 
 
