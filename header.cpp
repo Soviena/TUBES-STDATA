@@ -1,7 +1,5 @@
 #include "header.h"
 
-
-
 // void create_list(adrList &L){
 //     L->firstGenre = NULL;
 //     L->firstItem = NULL;
