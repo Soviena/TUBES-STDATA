@@ -11,7 +11,7 @@ typedef struct elm_relation *adrRelation;
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
-    list list;
+    list lists;
 };
 struct item /* Buku atau anime */{ 
     adrItem next;
@@ -56,6 +56,8 @@ void markFinished(list L, string title);
 void deleteFinished(list L);
 // Cari semua item yang telah ditandai finished lalu hapus item tersebut
 void totalEpisode(list L, string genreName);
+
+void menu(int input);
 
 /*
 ○ 2 jenis pengolahan data yang melibatkan child dan parent (total 20 poin),
