@@ -11,20 +11,29 @@ typedef struct elm_relation *adrRelation;
 struct genre /* Genre */{
     string genre_name;
     adrGenre next;
-    listR itemList;
+    list list;
 };
 struct item /* Buku atau anime */{ 
     adrItem next;
     string ttle;
-};
-struct listR{
-    adrRelation first;
 };
 
 struct elm_relation{
     adrGenre nextGenre;
     adrRelation next;
 };
+
+struct list{
+    adrGenre firstGenre;
+    adrItem firstItem;
+    adrRelation firstRelation;
+};
+
+list create_list(list &L);
+adrGenre createGenre(string name);
+adrItem createItem(string title);
+
+
 
 /*
 ○ Insert Parent (5 Poin)
