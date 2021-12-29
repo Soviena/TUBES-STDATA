@@ -68,11 +68,55 @@ adrGenre findParent(list L, string G){
     return NULL;
 }
 
+void makeRelation(list &L, string genre, string title){
+    adrGenre G = findParent(L,genre);
+    adrItem I = findChild(L, title);
+
+    adrRelation P = G->lists.firstRelation;
+    adrRelation R = new elm_relation;
+    R->item = I;
+    R->next = NULL;
+    
+    if(P == NULL){
+        G->lists.firstRelation = R;
+    }else{
+        while (P->next != NULL){
+            P = P->next;
+        }
+        P->next = R;
+    }
+    
+}
+
+void deleteRelation(list &L, string genre, string title){
+    adrGenre G = findParent(L,genre);
+    adrRelation P = G->lists.firstRelation;
+    if(P == NULL) return;
+    adrItem I = findChild(L, title);
+    if(I == NULL) return;
+
+    if(P->item == I){
+        G->lists.firstRelation = P->next;
+        P->next = NULL;    
+    }else{
+        while(P->next != NULL){
+            if(P->next->item == I){
+                adrRelation J = P->next;
+                P->next = J->next;
+                J->next = NULL;
+            }else{
+                P = P->next;
+            }
+        }    
+    }
+}
+
 void menu(int input, list &L){
     switch (input){
     case 1:
         cout << endl << "Daftar genre" << endl;
         showParent(L);
+        getch();
         break;
     case 2:
         string genre;

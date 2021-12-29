@@ -1,6 +1,7 @@
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 
+#include <conio.h>
 #include <iostream>
 using namespace std;
 
@@ -43,7 +44,7 @@ adrGenre findParent(list L, string G);
 void insert_child(list &L, adrItem I);
 adrItem delete_child(list &L, adrItem I);
 void showChild(list L);
-adrItem findChild(list L, string genre, string title);
+adrItem findChild(list L, string title);
 
 void makeRelation(list &L, string genre, string title);
 void deleteRelation(list &L, string genre, string title);
