@@ -59,19 +59,15 @@ void showParent(list L){
 
 adrGenre findParent(list L, string G){
     adrGenre P = L.firstGenre;
-    while (P->genre_name != G){
-        P = P->next;
+    while (P != NULL){
         if(P->genre_name == G){
             return P;
         }
+        P = P->next;
     }
     return NULL;
 }
 
 void menu(int input){
-    cout << "" << endl;
-    cout << "[1] Tambah genre" << endl;
-    cout << "[2] Hapus genre" << endl;
-    cout << "[3] Tambah Item" << endl;
-    cout << "[4] Hapus Item" << endl;
+    
 }
