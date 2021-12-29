@@ -125,5 +125,52 @@ void menu(int input, list &L){
         insert_parent(L, G);
         break;
     }
-    
+}
+
+void showTitleGenre(list L, string title){
+    adrRelation R;
+    adrItem I = findChild(L,title);
+    if(I == NULL) return;
+    adrGenre G = L.firstGenre;
+    while(G != NULL){
+        R = G->lists.firstRelation;
+        while(R != NULL){
+            if(R->item == I) cout << G->genre_name << " - ";
+            R = R->next;
+        }
+        G = G->next;
+    }
+}
+
+void markFinished(list L, string title){
+    adrItem I = findChild(L,title);
+    if(I == NULL) return;
+    I->finished = true;
+}
+
+void deleteFinished(list L){
+    adrItem P = L.firstItem;
+    adrGenre G;
+    while(P != NULL){
+        G = L.firstGenre;
+        if(P->finished){
+            while (G != NULL){
+                deleteRelation(L,G->genre_name,P->title);
+                G = G->next;
+            }
+            adrItem Q = delete_child(L,P);
+            delete Q;
+        }
+        P = P->next;
+    }
+}
+
+int totalEpisode(list L, string genreName){
+    adrGenre G = findParent(L,genreName);
+    adrRelation R = G->lists.firstRelation;
+    int totalEpisode = 0;
+    while(R != NULL){
+        totalEpisode += R->item->episode;
+        R = R->next;
+    }
 }
