@@ -52,7 +52,7 @@ adrGenre delete_parent(list &L, adrGenre G){
 void showParent(list L){
     adrGenre P = L.firstGenre;
     while (P != NULL){
-        cout << P->genre_name << endl;
+        cout << P->genre_name << ", ";
         P = P->next;
     } 
 }
@@ -97,7 +97,7 @@ adrItem delete_child(list &L, adrItem I){
 void showChild(list L){
     adrItem P = L.firstItem;
     while (P != NULL){
-        cout << P->title << endl;
+        cout << P->title << ", ";
         P = P->next;
     } 
 }
@@ -178,11 +178,14 @@ void menu(int input, list &L){
             string genre;
             int i = 1;
             int eps;
+            cout << "\nInput tanpa spasi, gunakan -";
             cout << "\nJudul Buku / Anime\t: "; cin >> title;
             cout << "Volume / Episode\t: "; cin >> eps;
             adrItem I = createItem(L,title,eps);
             insert_child(L,I);
             cout << "Input Genre, masukkan . untuk berhenti" << endl;
+            cout << "Genre yang tersedia : "; showParent(L);
+            cout << "\n";
             while(genre != "."){
                 cout << "Genre "<<i<<"\t: "; cin >> genre;
                 if(findParent(L,genre) == NULL){
@@ -252,7 +255,7 @@ void printRelation(list L){
     adrRelation R;
     int i;
     while(G != NULL){
-        cout << "\tGENRE : " << G->genre_name << "\n";
+        cout << "\n\tGENRE : " << G->genre_name << "\n";
         R = G->lists.firstRelation;
         i = 1;
         while (R != NULL){   
