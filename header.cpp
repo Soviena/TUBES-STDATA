@@ -68,6 +68,18 @@ adrGenre findParent(list L, string G){
     return NULL;
 }
 
-void menu(int input){
+void menu(int input, list &L){
+    switch (input){
+    case 1:
+        cout << endl << "Daftar genre" << endl;
+        showParent(L);
+        break;
+    case 2:
+        string genre;
+        cout << endl << "Nama Genre : "; cin >> genre;
+        adrGenre G = createGenre(L,genre);
+        insert_parent(L, G);
+        break;
+    }
     
 }

@@ -57,7 +57,7 @@ void deleteFinished(list L);
 // Cari semua item yang telah ditandai finished lalu hapus item tersebut
 void totalEpisode(list L, string genreName);
 
-void menu(int input);
+void menu(int input, list &L);
 
 /*
 ○ 2 jenis pengolahan data yang melibatkan child dan parent (total 20 poin),
