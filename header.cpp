@@ -38,10 +38,13 @@ void insert_parent(list &L, adrGenre G){
 adrGenre delete_parent(list &L, adrGenre G){
     if (L.firstGenre == NULL) return NULL;
     if (L.firstGenre == G){
-        L.firstGenre = NULL;
+        L.firstGenre = G->next;
+        G->next = NULL;
+        return G;
     }
     adrGenre P = L.firstGenre;
-    while (P->next != G){
+    while (P->next != NULL){
+        if(P->next == G) break;
         P = P->next;
     }
     P->next = G->next;
@@ -83,15 +86,28 @@ void insert_child(list &L, adrItem I){
 adrItem delete_child(list &L, adrItem I){
     if (L.firstItem == NULL) return NULL;
     if (L.firstItem == I){
-        L.firstItem = NULL;
+        L.firstItem = I->next;
+        I->next = NULL;
+        deleteChildfromAllGenre(L,I);
+        return I;
     }
     adrItem P = L.firstItem;
-    while (P->next != I){
+    while (P->next != NULL){
+        if(P->next == I) break;
         P = P->next;
     }
     P->next = I->next;
     I->next = NULL;
+    deleteChildfromAllGenre(L,I);
     return I;
+}
+
+void deleteChildfromAllGenre(list &L, adrItem I){
+    adrGenre G = L.firstGenre;
+    while(G != NULL){
+        deleteRelation(L,G,I);
+        G = G->next;
+    }
 }
 
 void showChild(list L){
@@ -134,13 +150,9 @@ void makeRelation(list &L, string genre, string title){
 }
 
 
-void deleteRelation(list &L, string genre, string title){
-    adrGenre G = findParent(L,genre);
+void deleteRelation(list &L, adrGenre G, adrItem I){
     adrRelation P = G->lists.firstRelation;
     if(P == NULL) return;
-    adrItem I = findChild(L, title);
-    if(I == NULL) return;
-
     if(P->item == I){
         G->lists.firstRelation = P->next;
         P->next = NULL;    
@@ -176,13 +188,21 @@ void menu(int input, list &L){
         case 3:{
             string title;
             string genre;
+            adrItem I;
             int i = 1;
             int eps;
             cout << "\nInput tanpa spasi, gunakan -";
             cout << "\nJudul Buku / Anime\t: "; cin >> title;
             cout << "Volume / Episode\t: "; cin >> eps;
-            adrItem I = createItem(L,title,eps);
-            insert_child(L,I);
+            if(findChild(L,title) == NULL){
+                I = createItem(L,title,eps);
+                insert_child(L,I);
+            }else{
+                I = findChild(L,title);
+                I->episode = eps;
+                cout << "Episode / Volume telah di update!\n";
+                break;
+            }
             cout << "Input Genre, masukkan . untuk berhenti" << endl;
             cout << "Genre yang tersedia : "; showParent(L);
             cout << "\n";
@@ -196,6 +216,48 @@ void menu(int input, list &L){
                 }
             }
             break;
+        }
+        case 4:{
+            string title;
+            cout << "Daftar Buku / Anime\t: ";showChild(L);
+            cout << "\nJudul Buku / Anime\t: "; cin >> title;
+            markFinished(L,title);
+            break;
+        }
+        case 5:{
+            deleteFinished(L);
+            cout << "\nBuku / Anime yang sudah tamat telah dihapus!\n";
+            break;
+        }
+        case 6:{
+            cout << "\nDaftar genre : ";showParent(L);
+            cout << "\n\tPRESS [ENTER] TO CONTINUE\n";
+            getch();
+            break;
+        }
+        case 7:{
+            cout << "\nDaftar genre : ";showChild(L);
+            cout << "\n\tPRESS [ENTER] TO CONTINUE\n";
+            getch();
+            break;     
+        }
+        case 8:{
+            string genre;
+            cout << "Daftar genre : "; showParent(L);
+            cout << "\nGenre yang dihapus : ";cin >> genre;
+            adrGenre G = findParent(L,genre);
+            G = delete_parent(L,G);
+            cout << "Genre " << G->genre_name << " Telah dihapus !!\n";
+            break;
+        }
+        case 9:{
+            string title;
+            cout << "Daftar Buku / Anime : "; showChild(L);
+            cout << "\nBuku / Anime yang dihapus : ";cin >> title;
+            adrItem I = findChild(L,title);
+            I = delete_child(L,I);
+            cout << I->title << " Telah dihapus !!\n";
+            break;            
         }
     }
 }
@@ -223,16 +285,9 @@ void markFinished(list L, string title){
 
 void deleteFinished(list L){
     adrItem P = L.firstItem;
-    adrGenre G;
     while(P != NULL){
-        G = L.firstGenre;
         if(P->finished){
-            while (G != NULL){
-                deleteRelation(L,G->genre_name,P->title);
-                G = G->next;
-            }
-            adrItem Q = delete_child(L,P);
-            delete Q;
+            delete_child(L,P);
         }
         P = P->next;
     }

@@ -21,6 +21,8 @@ int main(){
         cout << "\t[5] Hapus yg sudah tamat dari bookmark" << endl; // Delete finished
         cout << "\t[6] Lihat daftar genre" << endl;
         cout << "\t[7] Lihat daftar buku / anime" << endl;
+        cout << "\t[8] Hapus Genre" << endl;
+        cout << "\t[9] Hapus Buku / Anime" << endl;
         cout << "\t[0] Keluar" << endl << endl;
         cout << "\tMasukkan input : \033[0m";
         cin >> inputMenu;
