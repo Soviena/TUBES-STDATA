@@ -117,7 +117,7 @@ adrItem findChild(list L, string genre, string title){
         P = P->next;
     }
     return NULL;
-
+}
 void makeRelation(list &L, string genre, string title){
     adrGenre G = findParent(L,genre);
     adrItem I = findChild(L, title);
