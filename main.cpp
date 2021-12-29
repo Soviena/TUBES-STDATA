@@ -24,6 +24,5 @@ int main(){
         cin >> inputMenu;
         menu(inputMenu,L);   
     }
-
     return 0;
 }
