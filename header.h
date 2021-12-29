@@ -57,7 +57,7 @@ void markFinished(list L, string title);
 // Menandai suatu title bahwa title itu sudah dibaca atau ditonton
 void deleteFinished(list L);
 // Cari semua item yang telah ditandai finished lalu hapus item tersebut
-int totalEpisode(list L, string genreName);
+int totalEpisode(list L, adrGenre G);
 
 void menu(int input, list &L);
 

@@ -293,15 +293,14 @@ void deleteFinished(list L){
     }
 }
 
-int totalEpisode(list L, string genreName){
-    adrGenre G = findParent(L,genreName);
+int totalEpisode(list L, adrGenre G){
     adrRelation R = G->lists.firstRelation;
-    int totalEpisode = 0;
+    int total = 0;
     while(R != NULL){
-        totalEpisode += R->item->episode;
+        total += R->item->episode;
         R = R->next;
     }
-    return totalEpisode;
+    return total;
 }
 
 void printRelation(list L){
@@ -314,13 +313,13 @@ void printRelation(list L){
         R = G->lists.firstRelation;
         i = 1;
         while (R != NULL){   
-            cout << "\t" << i << ". " << R->item->title << " Episode - " << R->item->episode;
+            cout << "\t" << i << ". " << R->item->title << " Episode / Volume - " << R->item->episode;
             if(R->item->finished) cout << " SELESAI";
             cout << "\n";
             i++;
             R = R->next;
         }
-        cout << "\n";
+        cout << "\tTotal Episode / Volume : "<< totalEpisode(L,G) << "\n";
         G = G->next;
     }
 }
