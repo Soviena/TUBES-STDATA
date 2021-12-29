@@ -173,4 +173,5 @@ int totalEpisode(list L, string genreName){
         totalEpisode += R->item->episode;
         R = R->next;
     }
+    return totalEpisode;
 }
