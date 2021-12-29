@@ -102,19 +102,13 @@ void showChild(list L){
     } 
 }
 
-adrItem findChild(list L, string genre, string title){
-    adrGenre P = L.firstGenre;
-    adrItem Q = L.firstItem;
-    while (P != NULL){
-        if(P->genre_name == genre){
-            while (Q != NULL){
-                if (Q->title == title){
-                    return Q;
-                }
-                Q= Q->next;
-            }
+adrItem findChild(list L, string title){
+    adrItem I = L.firstItem;
+    while (I != NULL){
+        if(I->title == title){
+            return I;
         }
-        P = P->next;
+        I = I->next;
     }
     return NULL;
 }
