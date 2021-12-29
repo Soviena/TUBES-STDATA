@@ -159,17 +159,41 @@ void deleteRelation(list &L, string genre, string title){
 
 void menu(int input, list &L){
     switch (input){
-    case 1:
-        cout << endl << "Daftar genre" << endl;
-        showParent(L);
-        getch();
-        break;
-    case 2:
-        string genre;
-        cout << endl << "Nama Genre : "; cin >> genre;
-        adrGenre G = createGenre(L,genre);
-        insert_parent(L, G);
-        break;
+        case 1:{
+            printRelation(L);
+            cout << "\n\tPRESS [ENTER] TO CONTINUE\n";
+            getch();
+            break;
+        }
+        case 2:{
+            string genre;
+            cout << "\nInput tanpa spasi, gunakan -";
+            cout << endl << "Nama Genre : "; cin >> genre;
+            adrGenre G = createGenre(L,genre);
+            insert_parent(L, G);
+            break;
+        }
+        case 3:{
+            string title;
+            string genre;
+            int i = 1;
+            int eps;
+            cout << "\nJudul Buku / Anime\t: "; cin >> title;
+            cout << "Volume / Episode\t: "; cin >> eps;
+            adrItem I = createItem(L,title,eps);
+            insert_child(L,I);
+            cout << "Input Genre, masukkan . untuk berhenti" << endl;
+            while(genre != "."){
+                cout << "Genre "<<i<<"\t: "; cin >> genre;
+                if(findParent(L,genre) == NULL){
+                    cout << "Genre tidak ada !\n";
+                }else{
+                    makeRelation(L,genre,title);
+                    i++;
+                }
+            }
+            break;
+        }
     }
 }
 
@@ -220,4 +244,25 @@ int totalEpisode(list L, string genreName){
         R = R->next;
     }
     return totalEpisode;
+}
+
+void printRelation(list L){
+    adrGenre G = L.firstGenre;
+    if(G == NULL) return;
+    adrRelation R;
+    int i;
+    while(G != NULL){
+        cout << "\tGENRE : " << G->genre_name << "\n";
+        R = G->lists.firstRelation;
+        i = 1;
+        while (R != NULL){   
+            cout << "\t" << i << ". " << R->item->title << " Episode - " << R->item->episode;
+            if(R->item->finished) cout << " SELESAI";
+            cout << "\n";
+            i++;
+            R = R->next;
+        }
+        cout << "\n";
+        G = G->next;
+    }
 }
