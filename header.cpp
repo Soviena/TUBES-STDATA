@@ -68,6 +68,57 @@ adrGenre findParent(list L, string G){
     return NULL;
 }
 
+void insert_child(list &L, adrItem I){
+    if (L.firstItem == NULL){
+        L.firstItem = I;
+    } else {
+        adrItem P = L.firstItem;
+        while (P->next != NULL){
+            P = P->next;
+        }
+        P->next = I;
+    }
+}
+
+adrItem delete_child(list &L, adrItem I){
+    if (L.firstItem == NULL) return NULL;
+    if (L.firstItem == I){
+        L.firstItem = NULL;
+    }
+    adrItem P = L.firstItem;
+    while (P->next != I){
+        P = P->next;
+    }
+    P->next = I->next;
+    I->next = NULL;
+    return I;
+}
+
+void showChild(list L){
+    adrItem P = L.firstItem;
+    while (P != NULL){
+        cout << P->title << endl;
+        P = P->next;
+    } 
+}
+
+adrItem findChild(list L, string genre, string title){
+    adrGenre P = L.firstGenre;
+    adrItem Q = L.firstItem;
+    while (P != NULL){
+        if(P->genre_name == genre){
+            while (Q != NULL){
+                if (Q->title == title){
+                    return Q;
+                }
+                Q= Q->next;
+            }
+        }
+        P = P->next;
+    }
+    return NULL;
+}
+
 void menu(int input, list &L){
     switch (input){
     case 1:
