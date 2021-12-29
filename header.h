@@ -47,7 +47,8 @@ void showChild(list L);
 adrItem findChild(list L, string title);
 
 void makeRelation(list &L, string genre, string title);
-void deleteRelation(list &L, string genre, string title);
+void deleteRelation(list &L, adrGenre G, adrItem I);
+void deleteChildfromAllGenre(list &L, adrItem I);
 
 // pengolahan data //
 void showTitleGenre(list L, string title);
@@ -59,6 +60,8 @@ void deleteFinished(list L);
 int totalEpisode(list L, string genreName);
 
 void menu(int input, list &L);
+
+void printRelation(list L);
 
 /*
 ○ 2 jenis pengolahan data yang melibatkan child dan parent (total 20 poin),
