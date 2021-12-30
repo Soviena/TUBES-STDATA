@@ -235,7 +235,13 @@ void menu(int input, list &L){
             break;
         }
         case 7:{
-            cout << "\nDaftar genre : ";showChild(L);
+            adrItem I = L.firstItem;
+            while (I != NULL){
+                cout << "\tJudul : " << I->title << "\n\tGenre : ";
+                showTitleGenre(L,I);
+                cout << "\n\n";
+                I = I->next;
+            }
             cout << "\n\tPRESS [ENTER] TO CONTINUE\n";
             getch();
             break;     
@@ -261,9 +267,8 @@ void menu(int input, list &L){
     }
 }
 
-void showTitleGenre(list L, string title){
+void showTitleGenre(list L, adrItem I){
     adrRelation R;
-    adrItem I = findChild(L,title);
     if(I == NULL) return;
     adrGenre G = L.firstGenre;
     while(G != NULL){
@@ -292,15 +297,14 @@ void deleteFinished(list L){
     }
 }
 
-int totalEpisode(list L, string genreName){
-    adrGenre G = findParent(L,genreName);
+int totalEpisode(list L, adrGenre G){
     adrRelation R = G->lists.firstRelation;
-    int totalEpisode = 0;
+    int total = 0;
     while(R != NULL){
-        totalEpisode += R->item->episode;
+        total += R->item->episode;
         R = R->next;
     }
-    return totalEpisode;
+    return total;
 }
 
 void printRelation(list L){
@@ -313,13 +317,13 @@ void printRelation(list L){
         R = G->lists.firstRelation;
         i = 1;
         while (R != NULL){   
-            cout << "\t" << i << ". " << R->item->title << " Episode - " << R->item->episode;
+            cout << "\t" << i << ". " << R->item->title << " Episode / Volume - " << R->item->episode;
             if(R->item->finished) cout << " SELESAI";
             cout << "\n";
             i++;
             R = R->next;
         }
-        cout << "\n";
+        cout << "\tTotal Episode / Volume : "<< totalEpisode(L,G) << "\n";
         G = G->next;
     }
 }
