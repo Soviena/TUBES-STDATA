@@ -236,7 +236,13 @@ void menu(int input, list &L){
             break;
         }
         case 7:{
-            cout << "\nDaftar genre : ";showChild(L);
+            adrItem I = L.firstItem;
+            while (I != NULL){
+                cout << "\tJudul : " << I->title << "\n\tGenre : ";
+                showTitleGenre(L,I);
+                cout << "\n\n";
+                I = I->next;
+            }
             cout << "\n\tPRESS [ENTER] TO CONTINUE\n";
             getch();
             break;     
@@ -262,9 +268,8 @@ void menu(int input, list &L){
     }
 }
 
-void showTitleGenre(list L, string title){
+void showTitleGenre(list L, adrItem I){
     adrRelation R;
-    adrItem I = findChild(L,title);
     if(I == NULL) return;
     adrGenre G = L.firstGenre;
     while(G != NULL){
