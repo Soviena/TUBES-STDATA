@@ -288,10 +288,14 @@ void markFinished(list L, string title){
 }
 
 void deleteFinished(list L){
-    adrItem P = L.firstItem;
+    adrGenre P = L.firstGenre;
     while(P != NULL){
-        if(P->finished){
-            delete_child(L,P);
+        adrRelation Q = P->lists.firstRelation;
+        while (Q != NULL){
+            if(Q->item->finished){
+                delete_child(L,Q->item);
+            }
+            Q = Q->next;
         }
         P = P->next;
     }
